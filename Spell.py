@@ -3,41 +3,41 @@ from enum import Enum
 
 class SpellClass(Enum):
     ATTACK = 'ATTACK',
-    SPECIAL ATTACK = 'SPECIAL ATTACK',
+    SPECIAL_ATTACK = 'SPECIAL ATTACK',
     STAT = 'STAT',
     STATUS = 'STATUS',
 
 
 class SpellType(Enum):
-    FIRE,
-    ELECTRIC,
-    WATER,
-    EARTH,
-    WIND,
+    FIRE = 'FIRE',
+    ELECTRIC = 'ELECTRIC',
+    WATER = 'WATER',
+    EARTH = 'EARTH',
+    WIND = 'WIND',
 
 
 class Status(Enum):
-    HEALTHY,
-    PARALYZED,
-    SLOWED,
-    POISONED,
-    BURNED,
-    FROZEN,
-    ASLEEP,
-    BLIND,
-    ROOTED,
-    SHEILDED,
-    NA
+    HEALTHY = 'HEALTHY',
+    PARALYZED = 'PARALYZED',
+    SLOWED = 'SLOWED',
+    POISONED = 'POISONED',
+    BURNED = 'BURNED',
+    FROZEN = 'FROZEN',
+    ASLEEP = 'ASLEEP',
+    BLIND = 'BLIND',
+    ROOTED = 'ROOTED',
+    SHEILDED = 'SHEILDED',
+    NA = 'NA'
 
 
 class Stat(Enum):
-    ATTACK,
-    DEFENSE,
-    SHEILD,
-    SPEED,
-    HIT_CHANCE,
-    EVASIVNESS,
-    NONE
+    ATTACK = 'ATTACK',
+    DEFENSE = 'DEFENSE',
+    SHEILD = 'SHEILD',
+    SPEED = 'SPEED',
+    HIT_CHANCE = 'HIT_CHANCE',
+    EVASIVNESS = 'EVASIVNESS',
+    NONE = 'NONE'
 
 
 class Spell:
