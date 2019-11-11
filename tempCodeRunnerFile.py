@@ -1,0 +1,2 @@
+
+GameScreen.fill(WhiteColor)

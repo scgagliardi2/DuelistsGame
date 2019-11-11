@@ -1,13 +1,35 @@
-import Spell
+import pygame
+import GameObject
 
 
-class Player:
+class PlayerCharacter(GameObject):
 
-    def __init__(self):
-        self.speed = 20
-        self.attack = 40
-        self.defense = 20
-        self.health = 1000
-        self.sheild = 0
-        self.moveOne = Spell.Spell("Empty1", Spell.SpellClass.ATTACK, 0,
-                                   0, Spell.SpellType.WATER, Spell.Status.NA, Spell.Stat.NONE)
+    Speed = 5
+
+    def __init__(self, ImagePath, x, y, width, heigth):
+        super().__init__(ImagePath, x, y, width, heigth)
+
+    def draw(self, background):
+        background.blit(self.image, (self.xPos, self.yPos))
+
+    def move(self, direction):
+        if direction == "up":
+            if self.yPos <= -30:
+                pass
+            else:
+                self.yPos -= self.Speed
+        elif direction == "down":
+            if self.yPos >= 710:
+                pass
+            else:
+                self.yPos += self.Speed
+        elif direction == "left":
+            if self.xPos <= -30:
+                pass
+            else:
+                self.xPos -= self.Speed
+        elif direction == "right":
+            if self.xPos >= 750:
+                pass
+            else:
+                self.xPos += self.Speed
