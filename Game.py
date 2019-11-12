@@ -1,9 +1,12 @@
 # gain access to the pygame library
 import pygame
+import Player
+import Spell
+import TerrianObject
 
 # size of game screen
-ScreenWidth = 800
-ScreenHeight = 800
+ScreenWidth = 900
+ScreenHeight = 900
 ScreenTitle = 'Duelists Game'
 
 # RGB Color codes
@@ -36,8 +39,9 @@ class Game:
     def RunGameLoop(self):
         IsGameOver = False
         direction = ""
+        drawFireball = False
 
-        PlayerChar = PlayerCharacter('Charmander.png', 500, 375, 50, 50)
+        PlayerChar = Player.Player('Images/Charmander.png', 500, 375, 30, 30)
 
         # MAIN GAME LOOP
         while not IsGameOver:
@@ -58,7 +62,11 @@ class Game:
                 elif event.type == pygame.KEYUP:
                     if event.key == pygame.K_UP or event.key == pygame.K_DOWN or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                         direction = ""
-            # print(event) uncomment to log events
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    drawFireball = True
+                elif event.type == pygame.MOUSEBUTTONUP:
+                    pass
+            # print(event)
 
             self.GameScreen.fill(WhiteColor)
             # update player position
@@ -66,60 +74,17 @@ class Game:
             # draw the player at the new position
             PlayerChar.draw(self.GameScreen)
 
+            if drawFireball == True:
+                mousePos = pygame.mouse.get_pos()
+                x = mousePos[0]
+                y = mousePos[1]
+                Fireball = Spell.Spell('Images/fireball.png', x, y, 50, 50)
+                Fireball.draw(self.GameScreen)
+                drawFireball = False
+
             # update all game graphics
             pygame.display.update()
             clock.tick(self.TickRate)
-
-
-class GameObject:
-
-    def __init__(self, ImagePath, x, y, width, heigth):
-        # create player image
-        ObjectImage = pygame.image.load(ImagePath)
-        # scale image
-        self.image = pygame.transform.scale(ObjectImage, (100, 100))
-
-        self.xPos = x
-        self.yPos = y
-
-        self.width = width
-        self.height = heigth
-
-    def draw(self, background):
-        background.blit(self.image, (self.xPos, self.yPos))
-
-
-class PlayerCharacter(GameObject):
-
-    Speed = 5
-
-    def __init__(self, ImagePath, x, y, width, heigth):
-        super().__init__(ImagePath, x, y, width, heigth)
-
-    def draw(self, background):
-        background.blit(self.image, (self.xPos, self.yPos))
-
-    def move(self, direction):
-        if direction == "up":
-            if self.yPos <= -30:
-                pass
-            else:
-                self.yPos -= self.Speed
-        elif direction == "down":
-            if self.yPos >= 710:
-                pass
-            else:
-                self.yPos += self.Speed
-        elif direction == "left":
-            if self.xPos <= -30:
-                pass
-            else:
-                self.xPos -= self.Speed
-        elif direction == "right":
-            if self.xPos >= 750:
-                pass
-            else:
-                self.xPos += self.Speed
 
 
 pygame.init()
@@ -129,16 +94,3 @@ NewGame.RunGameLoop()
 
 pygame.quit()
 quit()
-
-
-# create player image
-# PlayerImage = pygame.image.load('Charmander.png')
-# PlayerImage = pygame.transform.scale(PlayerImage, (100, 100))
-
-# draw rectangle
-# pygame.draw.rect(GameScreen, RedColor, [350, 350, 100, 100])
-# draw circle
-# pygame.draw.circle(GameScreen, BlueColor, (400, 400), 20)
-
-# insert Charmander image
-# GameScreen.blit(PlayerImage, (300, 300))

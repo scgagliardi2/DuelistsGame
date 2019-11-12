@@ -1,4 +1,5 @@
 from enum import Enum
+import pygame
 
 
 class SpellClass(Enum):
@@ -42,11 +43,47 @@ class Stat(Enum):
 
 class Spell:
 
-    def __init__(self, name, SpellClass, damage, travelspeed, SpellType, Status, Stat):
-        self.name = name
-        self.SpellClass = SpellClass
-        self.damage = damage
-        self.travelspeed = travelspeed
-        self.SpellType = SpellType
-        self.StatusEffect = Status
-        self.StatEffect = Stat
+    def __init__(self, ImagePath, x, y, width, heigth):
+        # create spell image
+        ObjectImage = pygame.image.load(ImagePath)
+        # scale image
+        self.image = pygame.transform.scale(ObjectImage, (100, 100))
+
+        self.xPos = x
+        self.yPos = y
+
+        self.width = width
+        self.height = heigth
+
+        #self.name = name
+        #self.SpellClass = SpellClass
+        #self.damage = damage
+        #self.travelspeed = travelspeed
+        #self.SpellType = SpellType
+        #self.StatusEffect = Status
+        #self.StatEffect = Stat
+
+    def draw(self, background):
+        background.blit(self.image, (self.xPos, self.yPos))
+
+    def move(self, direction):
+        if direction == "up":
+            if self.yPos <= -30:
+                pass
+            else:
+                self.yPos -= self.Speed
+        elif direction == "down":
+            if self.yPos >= 710:
+                pass
+            else:
+                self.yPos += self.Speed
+        elif direction == "left":
+            if self.xPos <= -30:
+                pass
+            else:
+                self.xPos -= self.Speed
+        elif direction == "right":
+            if self.xPos >= 750:
+                pass
+            else:
+                self.xPos += self.Speed
