@@ -35,6 +35,9 @@ class Game:
         direction = ""
         drawFireball = False
         CastSpell1 = False
+        CastSpell2 = False
+        CastSpell3 = False
+        CastSpell4 = False
 
         PlayerChar = Player.Player('Images/Wizard Sprite/Wizard Back Face.png', 450, 450, 30, 33)
 
@@ -68,6 +71,12 @@ class Game:
                         direction = "left"
                     elif event.key == pygame.K_1:
                         CastSpell1 = True
+                    elif event.key == pygame.K_2:
+                        CastSpell2 = True
+                    elif event.key == pygame.K_3:
+                        CastSpell3 = True
+                    elif event.key == pygame.K_4:
+                        CastSpell4 = True
                 elif event.type == pygame.KEYUP:
                     if event.key == pygame.K_UP or event.key == pygame.K_DOWN or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                         direction = ""
@@ -89,6 +98,18 @@ class Game:
                 PlayerChar.Spell1.draw(
                     self.map.GameScreen, (PlayerChar.XPosition), (PlayerChar.YPosition))
                 CastSpell1 = False
+            if CastSpell2:
+                PlayerChar.Spell2.draw(
+                    self.map.GameScreen, (PlayerChar.XPosition), (PlayerChar.YPosition))
+                CastSpell2 = False
+            if CastSpell3:
+                PlayerChar.Spell3.draw(
+                    self.map.GameScreen, (PlayerChar.XPosition), (PlayerChar.YPosition))
+                CastSpell3 = False
+            if CastSpell4:
+                PlayerChar.Spell4.draw(
+                    self.map.GameScreen, (PlayerChar.XPosition), (PlayerChar.YPosition))
+                CastSpell4 = False
 
             # update player position
             PlayerChar.move(direction)
