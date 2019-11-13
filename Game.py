@@ -36,7 +36,7 @@ class Game:
         drawFireball = False
         CastSpell1 = False
 
-        PlayerChar = Player.Player('Images/Charmander.png', 500, 375, 30, 30)
+        PlayerChar = Player.Player('Images/Wizard Sprite/Wizard Back Face.png', 450, 450, 30, 33)
 
         # create line if trees
         TreeLine = [TerrainObject.TerrainObject('Images/Tree.png', 100, 100, 40, 40),
@@ -78,7 +78,7 @@ class Game:
                     pass
             # print(event)
 
-            self.map.GameScreen.fill(WhiteColor)
+            self.map.draw()
 
             # draw terrain
             for item in TreeLine:

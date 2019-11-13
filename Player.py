@@ -42,21 +42,29 @@ class Player:
                 pass
             else:
                 self.YPosition -= self.Speed
+                ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Back Face.png')
+                self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
         elif direction == "down":
             if self.YPosition >= 880:
                 pass
             else:
                 self.YPosition += self.Speed
+                ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Front Face.png')
+                self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
         elif direction == "left":
             if self.XPosition <= -20:
                 pass
             else:
                 self.XPosition -= self.Speed
+                ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Left Face.png')
+                self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
         elif direction == "right":
             if self.XPosition >= 880:
                 pass
             else:
                 self.XPosition += self.Speed
+                ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Right Face.png')
+                self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
         self.BoundingBox = [self.XPosition, self.YPosition,
                             self.Width, self.Height]
 

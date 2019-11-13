@@ -21,10 +21,13 @@ class Map:
         self.height = ScreenHeight
         self.width = ScreenWidth
         self.occupiedSpaces = [[]]
-
-        # create game display window
-        self.GameScreen = pygame.display.set_mode((self.width, self.height))
-        # set window color
-        self.GameScreen.fill(WhiteColor)
         # set window title
         pygame.display.set_caption(self.title)
+        # create game display window
+        self.GameScreen = pygame.display.set_mode((self.width, self.height))
+
+    def draw(self):
+        # set background
+        BackgroundImage = pygame.image.load('Images/Grass Map 2.jpg')
+        self.image = pygame.transform.scale(BackgroundImage, (self.width, self.height))
+        self.GameScreen.blit(self.image, (0, 0))
