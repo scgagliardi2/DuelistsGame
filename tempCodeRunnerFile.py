@@ -1,2 +1,1 @@
-
-GameScreen.fill(WhiteColor)
+'Images/Charmander.png', 500, 375, 30, 30

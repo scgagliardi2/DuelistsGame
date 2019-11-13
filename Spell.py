@@ -43,28 +43,30 @@ class Stat(Enum):
 
 class Spell:
 
-    def __init__(self, ImagePath, x, y, width, heigth):
-        # create spell image
-        ObjectImage = pygame.image.load(ImagePath)
-        # scale image
-        self.image = pygame.transform.scale(ObjectImage, (100, 100))
-
-        self.xPos = x
-        self.yPos = y
-
+    def __init__(self, KeyBinding, ImagePath, width, heigth, name, SpellClass, damage, travelspeed, SpellType, Status, Stat):
+        self.KeyBinding = KeyBinding
         self.width = width
         self.height = heigth
+        self.ImagePath = ImagePath
+        self.name = name
+        self.SpellClass = SpellClass
+        self.damage = damage
+        self.travelspeed = travelspeed
+        self.SpellType = SpellType
+        self.StatusEffect = Status
+        self.StatEffect = Stat
+        self.x = 0
+        self.y = 0
 
-        #self.name = name
-        #self.SpellClass = SpellClass
-        #self.damage = damage
-        #self.travelspeed = travelspeed
-        #self.SpellType = SpellType
-        #self.StatusEffect = Status
-        #self.StatEffect = Stat
-
-    def draw(self, background):
-        background.blit(self.image, (self.xPos, self.yPos))
+    def draw(self, background, x, y):
+        # create spell image
+        ObjectImage = pygame.image.load(self.ImagePath)
+        # scale image
+        self.image = pygame.transform.scale(
+            ObjectImage, (self.width, self.height))
+        self.x = x
+        self.y = y
+        background.blit(self.image, (self.x, self.y))
 
     def move(self, direction):
         if direction == "up":

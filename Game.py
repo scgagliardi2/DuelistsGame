@@ -1,8 +1,9 @@
 # gain access to the pygame library
 import pygame
+import Map
 import Player
 import Spell
-import TerrianObject
+import TerrainObject
 
 # size of game screen
 ScreenWidth = 900
@@ -24,24 +25,30 @@ class Game:
     # FPS rate
     TickRate = 60
 
-    def __init__(self, width, height, title):
-        self.title = title
-        self.height = height
-        self.wifth = width
+    def __init__(self):
+        self.map = Map.Map()
 
-        # create game display window
-        self.GameScreen = pygame.display.set_mode((width, height))
-        # set window color
-        self.GameScreen.fill(WhiteColor)
-        # set window title
-        pygame.display.set_caption(title)
+        pass
 
     def RunGameLoop(self):
         IsGameOver = False
         direction = ""
         drawFireball = False
+        CastSpell1 = False
 
         PlayerChar = Player.Player('Images/Charmander.png', 500, 375, 30, 30)
+
+        # create line if trees
+        TreeLine = [TerrainObject.TerrainObject('Images/Tree.png', 100, 100, 40, 40),
+                    TerrainObject.TerrainObject(
+                        'Images/Tree.png', 125, 100, 40, 40),
+                    TerrainObject.TerrainObject(
+                        'Images/Tree.png', 150, 100, 40, 40),
+                    TerrainObject.TerrainObject(
+                        'Images/Tree.png', 175, 100, 40, 40),
+                    TerrainObject.TerrainObject(
+                        'Images/Tree.png', 200, 100, 40, 40),
+                    TerrainObject.TerrainObject('Images/Tree.png', 225, 100, 40, 40)]
 
         # MAIN GAME LOOP
         while not IsGameOver:
@@ -59,28 +66,35 @@ class Game:
                         direction = "right"
                     elif event.key == pygame.K_LEFT:
                         direction = "left"
+                    elif event.key == pygame.K_1:
+                        CastSpell1 = True
                 elif event.type == pygame.KEYUP:
                     if event.key == pygame.K_UP or event.key == pygame.K_DOWN or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                         direction = ""
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    drawFireball = True
+                    # drawFireball = True
+                    pass
                 elif event.type == pygame.MOUSEBUTTONUP:
                     pass
             # print(event)
 
-            self.GameScreen.fill(WhiteColor)
+            self.map.GameScreen.fill(WhiteColor)
+
+            # draw terrain
+            for item in TreeLine:
+                item.draw(self.map.GameScreen)
+
+            # update player spell cast
+            if CastSpell1:
+                PlayerChar.Spell1.draw(
+                    self.map.GameScreen, (PlayerChar.XPosition), (PlayerChar.YPosition))
+                CastSpell1 = False
+
             # update player position
             PlayerChar.move(direction)
-            # draw the player at the new position
-            PlayerChar.draw(self.GameScreen)
 
-            if drawFireball == True:
-                mousePos = pygame.mouse.get_pos()
-                x = mousePos[0]
-                y = mousePos[1]
-                Fireball = Spell.Spell('Images/fireball.png', x, y, 50, 50)
-                Fireball.draw(self.GameScreen)
-                drawFireball = False
+            # draw the player at the new position
+            PlayerChar.draw(self.map.GameScreen, self.map)
 
             # update all game graphics
             pygame.display.update()
@@ -89,7 +103,7 @@ class Game:
 
 pygame.init()
 
-NewGame = Game(ScreenWidth, ScreenHeight, ScreenTitle)
+NewGame = Game()
 NewGame.RunGameLoop()
 
 pygame.quit()
