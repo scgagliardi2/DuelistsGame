@@ -2,7 +2,7 @@ import pygame
 
 pygame.init()
 
-class GameObject:
+class HUD:
 
     def __init__(self, ImagePath, x, y, width, heigth):
         # create player image

@@ -19,8 +19,7 @@ class Player:
             ObjectImage, (self.Width, self.Height))
         self.XPosition = x
         self.YPosition = y
-        self.BoundingBox = [self.XPosition, self.YPosition,
-                            self.Width, self.Height]
+        self.Facing = "up"
         # Spellbook that player has access to
         CreateSpellBook = Spellbook.Spellbook()
         self.SpellBook = CreateSpellBook.spellbook
@@ -36,37 +35,32 @@ class Player:
     def draw(self, background, map):
         background.blit(self.image, (self.XPosition, self.YPosition))
 
-    def move(self, direction):
-        if direction == "up":
-            if self.YPosition <= -20:
-                pass
-            else:
-                self.YPosition -= self.Speed
-                ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Back Face.png')
-                self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
-        elif direction == "down":
-            if self.YPosition >= 880:
-                pass
-            else:
-                self.YPosition += self.Speed
-                ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Front Face.png')
-                self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
-        elif direction == "left":
-            if self.XPosition <= -20:
-                pass
-            else:
-                self.XPosition -= self.Speed
-                ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Left Face.png')
-                self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
-        elif direction == "right":
-            if self.XPosition >= 880:
-                pass
-            else:
-                self.XPosition += self.Speed
+    def move(self, x, y):
+        XTravel = x - self.XPosition
+        YTravel = y - self.YPosition
+        
+        #face the character a new direction
+        if abs(XTravel) > abs(YTravel):
+            if x > self.XPosition:
                 ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Right Face.png')
                 self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
-        self.BoundingBox = [self.XPosition, self.YPosition,
-                            self.Width, self.Height]
+                self.Facing = 'right'
+            else:
+                ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Left Face.png')
+                self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
+                self.Facing = 'left'
+        else:
+            if y < self.YPosition:
+                ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Back Face.png')
+                self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
+                self.Facing = 'up'
+            else:
+                ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Front Face.png')
+                self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
+                self.Facing = 'down'
+
+        self.XPosition = x
+        self.YPosition = y       
 
     def get_bounds(self, map):
         pass

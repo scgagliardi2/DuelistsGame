@@ -25,9 +25,9 @@ class Map:
         pygame.display.set_caption(self.title)
         # create game display window
         self.GameScreen = pygame.display.set_mode((self.width, self.height))
-
-    def draw(self):
         # set background
         BackgroundImage = pygame.image.load('Images/Grass Map 2.jpg')
         self.image = pygame.transform.scale(BackgroundImage, (self.width, self.height))
+
+    def draw(self):
         self.GameScreen.blit(self.image, (0, 0))
