@@ -58,14 +58,14 @@ class Spell:
         self.x = 0
         self.y = 0
 
-    def draw(self, background, x, y):
+    def draw(self, background, pos):
         # create spell image
         ObjectImage = pygame.image.load(self.ImagePath)
         # scale image
         self.image = pygame.transform.scale(
             ObjectImage, (self.width, self.height))
-        self.x = x
-        self.y = y
+        self.x = pos[0]
+        self.y = pos[1]
         background.blit(self.image, (self.x, self.y))
 
     def move(self, direction):

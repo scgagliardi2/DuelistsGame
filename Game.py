@@ -62,7 +62,7 @@ class Game:
                     pass
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if pygame.mouse.get_pressed()[2]:
-                        PlayerMove = True
+                        PlayerChar.set_target(pygame.mouse.get_pos())
                 elif event.type == pygame.MOUSEBUTTONUP:
                     pass
             # print(event)
@@ -76,25 +76,23 @@ class Game:
             # update player spell cast
             if CastSpell1:
                 PlayerChar.Spell1.draw(
-                    self.map.GameScreen, (PlayerChar.XPosition), (PlayerChar.YPosition))
+                    self.map.GameScreen, PlayerChar.pos)
                 CastSpell1 = False
             if CastSpell2:
                 PlayerChar.Spell2.draw(
-                    self.map.GameScreen, (PlayerChar.XPosition), (PlayerChar.YPosition))
+                    self.map.GameScreen, PlayerChar.pos)
                 CastSpell2 = False
             if CastSpell3:
                 PlayerChar.Spell3.draw(
-                    self.map.GameScreen, (PlayerChar.XPosition), (PlayerChar.YPosition))
+                    self.map.GameScreen, PlayerChar.pos)
                 CastSpell3 = False
             if CastSpell4:
                 PlayerChar.Spell4.draw(
-                    self.map.GameScreen, (PlayerChar.XPosition), (PlayerChar.YPosition))
+                    self.map.GameScreen, PlayerChar.pos)
                 CastSpell4 = False
 
             # update player position
-            if PlayerMove:
-                PlayerChar.move(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
-                PlayerMove = False
+            PlayerChar.update()
 
             # draw the player at the new position
             PlayerChar.draw(self.map.GameScreen, self.map)
