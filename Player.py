@@ -34,12 +34,15 @@ class Player:
         self.pos = pygame.Vector2(450, 450)
         self.set_target((450, 450))
 
+    # draw player image to screen
     def draw(self, background, map):
         background.blit(self.image, (self.pos))
 
+    # get destination vector from mouse right click
     def set_target(self, pos):
         self.target = pygame.Vector2(pos)
 
+    # move player and update image if necessary
     def update(self):
         # creat move vector and move
         move = self.target - self.pos

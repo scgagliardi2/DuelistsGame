@@ -17,17 +17,14 @@ class Game:
     def __init__(self):
         self.map = Map.Map()
 
-        pass
-
     def RunGameLoop(self):
         IsGameOver = False
-        direction = ""
-        PlayerMove = False
         CastSpell1 = False
         CastSpell2 = False
         CastSpell3 = False
         CastSpell4 = False
 
+        # create player
         PlayerChar = Player.Player('Images/Wizard Sprite/Wizard Back Face.png', 450, 450, 30, 33)
 
         # create line if trees
@@ -45,7 +42,7 @@ class Game:
         # MAIN GAME LOOP
         while not IsGameOver:
 
-            # check for events
+            # check for "events" like key presses and mouse clicks
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     IsGameOver = True
@@ -65,15 +62,16 @@ class Game:
                         PlayerChar.set_target(pygame.mouse.get_pos())
                 elif event.type == pygame.MOUSEBUTTONUP:
                     pass
-            # print(event)
+            # print(event) # uncomment to print all events to terminal
 
+            # draw map background
             self.map.draw()
 
             # draw terrain
             for item in TreeLine:
                 item.draw(self.map.GameScreen)
 
-            # update player spell cast
+            # cast any spells used
             if CastSpell1:
                 PlayerChar.Spell1.draw(
                     self.map.GameScreen, PlayerChar.pos)

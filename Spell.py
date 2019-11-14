@@ -59,33 +59,12 @@ class Spell:
         self.y = 0
 
     def draw(self, background, pos):
-        # create spell image
+        # load spell image
         ObjectImage = pygame.image.load(self.ImagePath)
         # scale image
         self.image = pygame.transform.scale(
             ObjectImage, (self.width, self.height))
+        # draw image to screen
         self.x = pos[0]
         self.y = pos[1]
         background.blit(self.image, (self.x, self.y))
-
-    def move(self, direction):
-        if direction == "up":
-            if self.yPos <= -30:
-                pass
-            else:
-                self.yPos -= self.Speed
-        elif direction == "down":
-            if self.yPos >= 710:
-                pass
-            else:
-                self.yPos += self.Speed
-        elif direction == "left":
-            if self.xPos <= -30:
-                pass
-            else:
-                self.xPos -= self.Speed
-        elif direction == "right":
-            if self.xPos >= 750:
-                pass
-            else:
-                self.xPos += self.Speed

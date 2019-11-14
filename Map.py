@@ -1,18 +1,11 @@
 # gain access to the pygame library
 import pygame
+import TerrainObject
 
 # size of game screen
 ScreenWidth = 900
 ScreenHeight = 900
 ScreenTitle = 'Duelists Game'
-
-# RGB Color codes
-WhiteColor = (255, 255, 255)
-BlackColor = (0, 0, 0)
-RedColor = (255, 0, 0)
-BlueColor = (0, 0, 255)
-GreenColor = (0, 255, 0)
-
 
 class Map:
 
@@ -20,7 +13,6 @@ class Map:
         self.title = ScreenTitle
         self.height = ScreenHeight
         self.width = ScreenWidth
-        self.occupiedSpaces = [[]]
         # set window title
         pygame.display.set_caption(self.title)
         # create game display window
