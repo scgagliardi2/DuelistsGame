@@ -7,7 +7,7 @@ import Spell
 class Player:
 
     # base player speed
-    Speed = 4
+    Speed = 3
 
     def __init__(self, ImagePath, x, y, width, heigth):
         self.Width = width
