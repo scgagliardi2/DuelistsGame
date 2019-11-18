@@ -27,7 +27,8 @@ class Game:
         CameraDirection = ""
 
         # create player
-        PlayerChar = Player.Player('Images/Wizard Sprite/Wizard Back Face.png', 250, 250, 30, 33)
+        PlayerChar = Player.Player(
+            'Images/Wizard Sprite/Wizard Back Face.png', 250, 250, 30, 33)
 
         # create line if trees
         TreeLine = [TerrainObject.TerrainObject('Images/Tree.png', 100, 100, 40, 40),
@@ -81,7 +82,10 @@ class Game:
             # move camera if called for
             if CameraMove:
                 self.map.update_camera(CameraDirection)
-            
+                PlayerChar.update_camera(CameraDirection)
+                for item in TreeLine:
+                    item.update_camera(CameraDirection)
+
             # draw map background
             self.map.draw()
 
@@ -111,8 +115,8 @@ class Game:
             PlayerChar.update()
 
             # draw the player at the new position
-            PlayerChar.draw(self.map.GameScreen, self.map)
-           
+            PlayerChar.draw(self.map.GameScreen)
+
             # update all game graphics
             pygame.display.update()
             clock.tick(self.TickRate)

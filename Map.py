@@ -27,10 +27,10 @@ class Map:
 
     def update_camera(self, direction):
         if direction == 'right':
-            self.CameraX -= 10
+            self.CameraX -= 5
         elif direction == 'left':
-            self.CameraX += 10
+            self.CameraX += 5
         elif direction == 'down':
-            self.CameraY -= 10
+            self.CameraY -= 5
         elif direction == 'up':
-            self.CameraY += 10
+            self.CameraY += 5

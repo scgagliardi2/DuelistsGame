@@ -35,7 +35,7 @@ class Player:
         self.set_target((450, 450))
 
     # draw player image to screen
-    def draw(self, background, map):
+    def draw(self, background):
         background.blit(self.image, (self.pos))
 
     # get destination vector from mouse right click
@@ -53,25 +53,43 @@ class Player:
             move.normalize_ip()
             move = move * self.Speed
             self.pos += move
-        
+
             # check direction of movement and update image
             if abs(move[0]) > abs(move[1]):
                 if move[0] >= 0:
-                    ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Right Face.png')
-                    self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
+                    ObjectImage = pygame.image.load(
+                        'Images/Wizard Sprite/Wizard Right Face.png')
+                    self.image = pygame.transform.scale(
+                        ObjectImage, (self.Width, self.Height))
                     self.Facing = "right"
                 else:
-                    ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Left Face.png')
-                    self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
+                    ObjectImage = pygame.image.load(
+                        'Images/Wizard Sprite/Wizard Left Face.png')
+                    self.image = pygame.transform.scale(
+                        ObjectImage, (self.Width, self.Height))
                     self.Facing = "left"
             else:
                 if move[1] >= 0:
-                    ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Front Face.png')
-                    self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
+                    ObjectImage = pygame.image.load(
+                        'Images/Wizard Sprite/Wizard Front Face.png')
+                    self.image = pygame.transform.scale(
+                        ObjectImage, (self.Width, self.Height))
                     self.Facing = "down"
                 elif move[1] < 0:
-                    ObjectImage = pygame.image.load('Images/Wizard Sprite/Wizard Back Face.png')
-                    self.image = pygame.transform.scale(ObjectImage, (self.Width, self.Height))
+                    ObjectImage = pygame.image.load(
+                        'Images/Wizard Sprite/Wizard Back Face.png')
+                    self.image = pygame.transform.scale(
+                        ObjectImage, (self.Width, self.Height))
                     self.Facing = "up"
 
         self.rect.topleft = list(int(v) for v in self.pos)
+
+    def update_camera(self, direction):
+        if direction == 'right':
+            self.pos[0] -= 5
+        elif direction == 'left':
+            self.pos[0] += 5
+        elif direction == 'down':
+            self.pos[1] -= 5
+        elif direction == 'up':
+            self.pos[1] += 5

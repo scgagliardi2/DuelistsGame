@@ -21,5 +21,12 @@ class TerrainObject:
     def draw(self, background):
         background.blit(self.image, (self.xPos, self.yPos))
 
-    def get_bounds(self, map):
-        pass
+    def update_camera(self, direction):
+        if direction == 'right':
+            self.xPos -= 5
+        elif direction == 'left':
+            self.xPos += 5
+        elif direction == 'down':
+            self.yPos -= 5
+        elif direction == 'up':
+            self.yPos += 5
